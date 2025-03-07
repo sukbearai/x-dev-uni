@@ -23,7 +23,6 @@ const buttonColors = [
   'bg-[#eee]',
   'bg-[#fff]',
 ]
-const visible = ref(true)
 const title = ref('Hello')
 const themeRef = ref(uni.getSystemInfoSync().theme)
 const classArray = computed(() => [
