@@ -62,7 +62,6 @@ function copy(data: string) {
 
 <template>
   <view class="content">
-    <wd-keyboard v-model:visible="visible" extra-key="X" close-text="完成" />
     <WeappTailwindcss />
     <view class="my-3 w-full border-t border-solid border-gray-200" />
     <view class="text-xl text-gray-600/95">

@@ -5,7 +5,13 @@
 		  "^wd-(.*)": "wot-design-uni/components/wd-$1/wd-$1.vue"
     }
   },
-  "pages": [ // pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+  "pages": [
+    {
+      "path": "pages/mine/index",
+      "style": {
+        "navigationBarTitleText": "我的"
+      }
+    },
     {
       "path": "pages/index/index",
       "style": {
@@ -13,6 +19,26 @@
       }
     }
   ],
+  "tabBar": {
+    "color": "#bfbfbf",
+    "custom": true,
+    "height": "0",
+    "selectedColor": "#3F79FE",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "static/tabBar/course.png",
+        "selectedIconPath": "static/tabBar/course-selected.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/mine/index",
+        "iconPath": "static/tabBar/course.png",
+        "selectedIconPath": "static/tabBar/course-selected.png",
+        "text": "我的"
+      }
+    ]
+  },
   "globalStyle": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "weapp-tailwindcss",
