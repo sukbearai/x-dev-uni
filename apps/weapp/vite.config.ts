@@ -13,6 +13,9 @@ export default defineConfig({
     uvtw({
       rem2rpx: true,
       disabled: WeappTailwindcssDisabled,
+      cssPreflight: {
+        'box-sizing': false,
+      },
       // 使用新的 ast-grep 来处理 js 资源，速度是 babel 的2倍左右
       // 需要先安装 `@ast-grep/napi`, 安装完成后再启用下方配置
       // jsAstTool: 'ast-grep'
@@ -33,7 +36,7 @@ export default defineConfig({
     // https://vitejs.dev/config/shared-options.html#css-preprocessoroptions
     preprocessorOptions: {
       scss: {
-        silenceDeprecations: ['import', 'legacy-js-api', 'css-function-mixin','global-builtin'],
+        silenceDeprecations: ['import', 'legacy-js-api', 'css-function-mixin', 'global-builtin'],
       },
     },
   },
