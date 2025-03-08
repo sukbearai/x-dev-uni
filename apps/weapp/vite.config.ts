@@ -1,4 +1,5 @@
 import uni from '@dcloudio/vite-plugin-uni'
+import UniLayouts from '@uni-helper/vite-plugin-uni-layouts'
 import AutoImport from 'unplugin-auto-import/vite'
 import { defineConfig } from 'vite'
 import { UnifiedViteWeappTailwindcssPlugin as uvtw } from 'weapp-tailwindcss/vite'
@@ -7,8 +8,18 @@ import postcssPlugins from './postcss.config'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://dev-study.metaobe.com:9443/api/dcy-system-study',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/api/, ''),
+      },
+    },
+  },
   // uvtw 一定要放在 uni 后面
   plugins: [
+    UniLayouts(),
     uni(),
     uvtw({
       rem2rpx: true,

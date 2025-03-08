@@ -1,10 +1,38 @@
 <script setup lang="ts">
+import { useAuthStore } from '@/stores/useAuthStore'
+import { onLaunch } from '@dcloudio/uni-app'
+import useUpdateManager from './composables/useUpdateManager'
+
+useUpdateManager()
+
+const isInitialized = ref(false)
+
 onLaunch(() => {
   console.log('App Launch')
 })
-onShow(() => {
+
+onShow(async () => {
   console.log('App Show')
+  // 避免重复初始化
+  if (isInitialized.value) { return }
+
+  try {
+    const authStore = useAuthStore()
+    await authStore.initAuth()
+    isInitialized.value = true
+  }
+  catch (error) {
+    console.error('初始化认证状态失败:', error)
+    uni.showToast({
+      title: '初始化失败，请重新登录',
+      icon: 'none',
+      duration: 2000,
+    })
+    // 初始化失败时重置状态
+    isInitialized.value = false
+  }
 })
+
 onHide(() => {
   console.log('App Hide')
 })
@@ -14,6 +42,11 @@ onHide(() => {
 @use 'tailwindcss/base';
 @use 'tailwindcss/components';
 @use 'tailwindcss/utilities';
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
 
 /*  #ifdef  H5  */
 svg {

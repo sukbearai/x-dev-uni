@@ -2,8 +2,11 @@
   "name": "weapp",
   "version": "0.0.0",
   "scripts": {
-    "dev": "uni -p mp-weixin",
+    "dev": "uni --mode dev -p mp-weixin",
+    "prod": "uni --mode prod -p mp-weixin",
     "build": "npm run build:mp-weixin",
+    "build:dev": "uni --mode dev build -p mp-weixin && npm run upload:build",
+    "build:prod": "uni --mode prod build -p mp-weixin && npm run upload:build",
     "dev:app": "uni -p app",
     "dev:custom": "uni -p",
     "dev:h5": "uni",
@@ -44,6 +47,8 @@
     "up:uniapp": "pnpx @dcloudio/uvm@latest"
   },
   "dependencies": {
+    "@alova/adapter-uniapp": "catalog:",
+    "@alova/shared": "catalog:",
     "@dcloudio/uni-app": "catalog:",
     "@dcloudio/uni-app-harmony": "catalog:",
     "@dcloudio/uni-app-plus": "catalog:",
@@ -60,9 +65,12 @@
     "@dcloudio/uni-mp-xhs": "catalog:",
     "@dcloudio/uni-quickapp-webview": "catalog:",
     "@vue/shared": "catalog:",
+    "alova": "catalog:",
+    "jsencrypt": "^3.3.2",
     "pinia": "catalog:",
     "vue": "catalog:",
-    "vue-i18n": "catalog:"
+    "vue-i18n": "catalog:",
+    "wot-design-uni": "catalog:"
   },
   "devDependencies": {
     "@dcloudio/types": "catalog:",
@@ -76,6 +84,7 @@
     "@iconify-json/mdi": "catalog:",
     "@iconify-json/svg-spinners": "catalog:",
     "@types/node": "catalog:",
+    "@uni-helper/vite-plugin-uni-layouts": "catalog:",
     "@vue/runtime-core": "catalog:",
     "autoprefixer": "catalog:",
     "eslint": "catalog:",

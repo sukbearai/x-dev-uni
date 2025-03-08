@@ -4,31 +4,30 @@
 <img src="https://api.iconify.design/fluent-emoji:dog-face.svg" style="width:100px;" />
 </p>
 
-## x-dev-uni
+<h1 align="center">x-dev-uni</h1>
 
-常用开发工具集和物料组件库,使用 pnpm monorepo 管理。
+<p align="center">基于 pnpm monorepo 架构的 uni-app 开发工具集和物料组件库</p>
 
-## 安装
+## ✨ 特性
+
+- 📦 基于 pnpm workspace 的 monorepo 工程方案
+- 🎯 支持微信小程序、H5等多端开发
+- 🚀 集成日志、工具、UI组件等多个功能包
+- 💪 使用 TypeScript 构建，提供完整的类型定义
+- 📖 包含完整的文档和使用示例
+
+## 📦 项目结构
 
 ```bash
-# 确保 pnpm升级到 9.8.0 以上 npm i -g pnpm@latest
-pnpm i
-
-pnpm run build  # 开发子包使用pnpm run dev
+.
+├── apps                # 应用目录
+│   ├── h5             # H5 应用
+│   └── weapp          # 微信小程序
+├── docs               # 文档站点
+├── examples           # 示例项目
+└── packages           # 工具包
+    ├── logger         # 日志包
+    ├── preset         # 预设样式包
+    ├── ui             # UI组件包
+    └── utils          # 工具包
 ```
-
-## 文档
-
-```bash
-# cd /docs
-pnpm run docs:dev
-```
-
-## Packages
-
-| 名称                                                                                    | 描述       |
-| --------------------------------------------------------------------------------------- | ---------- |
-| [@x-dev-uni/logger](https://github.com/sukbearai/x-dev-tools/blob/main/packages/logger) | 日志包     |
-| [@x-dev-uni/preset](https://github.com/sukbearai/x-dev-tools/blob/main/packages/preset) | 预设样式包 |
-| [@x-dev-uni/ui](https://github.com/sukbearai/x-dev-tools/blob/main/packages/ui)         | 物料包     |
-| [@x-dev-uni/utils](https://github.com/sukbearai/x-dev-tools/blob/main/packages/utils)   | 工具包     |

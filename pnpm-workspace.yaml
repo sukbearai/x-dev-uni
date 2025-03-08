@@ -5,6 +5,9 @@ packages:
   - packages/**
   - examples/*
 catalog:
+  '@alova/adapter-uniapp': ^2.0.11
+  '@alova/shared': ^1.1.2
+  '@uni-helper/vite-plugin-uni-layouts': ^0.1.10
   '@iconify-json/carbon': ^1.1.37
   '@types/fs-extra': ^11.0.4
   '@types/node': ^22.10.6
@@ -41,7 +44,10 @@ catalog:
   '@iconify-json/mdi': ^1.2.2
   '@iconify-json/svg-spinners': ^1.2.2
   '@vue/runtime-core': 3.5.13
+  jsencrypt: ^3.3.2
+  alova: ^3.2.9
   autoprefixer: ^10.4.20
+  wot-design-uni: ^1.7.1
   eslint: ^9.18.0
   postcss: ^8.5.1
   sass: ^1.83.4
