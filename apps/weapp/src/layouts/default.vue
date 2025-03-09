@@ -51,7 +51,7 @@ function handleChange({ value: index }: { value: number }) {
     >
       <wd-tabbar-item
         v-for="item in menus"
-        :key="item.text"
+        :key="item.id"
         :title="item.text"
         icon="home"
       />

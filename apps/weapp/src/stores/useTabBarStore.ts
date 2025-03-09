@@ -8,6 +8,7 @@ export enum Role {
 }
 
 export interface MenuItem {
+  id: string
   url: string
   text: string
   openType: 'reLaunch' | 'switchTab'
@@ -17,6 +18,7 @@ export interface MenuItem {
 
 const teacherMenus: MenuItem[] = [
   {
+    id: '1',
     url: '/pages/app/home/index',
     text: '主页',
     openType: 'reLaunch',
@@ -24,6 +26,7 @@ const teacherMenus: MenuItem[] = [
     selectIcon: '/static/tabBar/course-selected.png',
   },
   {
+    id: '2',
     url: '/pages/mine/index',
     text: '我的',
     openType: 'switchTab',
@@ -34,6 +37,7 @@ const teacherMenus: MenuItem[] = [
 
 const studentMenus: MenuItem[] = [
   {
+    id: '3',
     url: '/pages/app/home/index',
     text: '主页',
     openType: 'reLaunch',
@@ -41,6 +45,7 @@ const studentMenus: MenuItem[] = [
     selectIcon: '/static/tabBar/course-selected.png',
   },
   {
+    id: '4',
     url: '/pages/mine/index',
     text: '我的',
     openType: 'switchTab',
@@ -79,7 +84,7 @@ export const useTabBarStore = defineStore('tabBar', () => {
   function setMenus(role: Role): void {
     if (!role) {
       uni.redirectTo({
-        url: '/pages/common/app_login/index',
+        url: '/pages/common/login/index',
       })
     }
     else {
