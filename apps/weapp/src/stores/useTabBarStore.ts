@@ -15,7 +15,7 @@ export interface MenuItem {
   selectIcon: string
 }
 
-const teachingMenus: MenuItem[] = [
+const teacherMenus: MenuItem[] = [
   {
     url: '/pages/app/home/index',
     text: '主页',
@@ -32,7 +32,7 @@ const teachingMenus: MenuItem[] = [
   },
 ]
 
-const learningMenus: MenuItem[] = [
+const studentMenus: MenuItem[] = [
   {
     url: '/pages/app/home/index',
     text: '主页',
@@ -54,7 +54,7 @@ export const useTabBarStore = defineStore('tabBar', () => {
   const hideNativeTabbar = ref<boolean>(false)
   const isShowTabBar = ref<boolean>(false)
   const current = ref<number>(0)
-  const menus = ref<MenuItem[]>(teachingMenus)
+  const menus = ref<MenuItem[]>([])
 
   function toggleShowTabBar(path: string): void {
     isShowTabBar.value = menus.value.some(menu => menu.url === `/${path}`)
@@ -77,8 +77,14 @@ export const useTabBarStore = defineStore('tabBar', () => {
   }
 
   function setMenus(role: Role): void {
-    menus.value = role === Role.teacher ? teachingMenus : learningMenus
-    uni.setStorageSync('role', role)
+    if (!role) {
+      uni.redirectTo({
+        url: '/pages/common/app_login/index',
+      })
+    }
+    else {
+      menus.value = [...(role === Role.teacher ? teacherMenus : studentMenus)]
+    }
   }
 
   function initTabBar(): void {
