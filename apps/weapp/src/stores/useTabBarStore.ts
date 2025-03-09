@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import { useAuthStore } from './useAuthStore'
 import { useUserStore } from './useUserStore'
 
 export enum Role {
@@ -83,9 +84,7 @@ export const useTabBarStore = defineStore('tabBar', () => {
 
   function setMenus(role: Role): void {
     if (!role) {
-      uni.redirectTo({
-        url: '/pages/common/login/index',
-      })
+      useAuthStore().logout()
     }
     else {
       menus.value = [...(role === Role.teacher ? teacherMenus : studentMenus)]
