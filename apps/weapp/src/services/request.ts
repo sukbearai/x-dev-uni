@@ -1,6 +1,5 @@
 /* eslint-disable ts/no-use-before-define */
 import { useAuthStore } from '@/stores/useAuthStore'
-import { useUserStore } from '@/stores/useUserStore'
 import { whiteList } from '@/utils/router-guard'
 import AdapterUniapp from '@alova/adapter-uniapp'
 import { createAlova } from 'alova'
@@ -17,10 +16,15 @@ function getBaseURL(forceServer?: ServerType): string {
       : import.meta.env.VITE_SERVER
   }
 
-  const userStore = useUserStore()
-  return userStore.userInfo?.roleList?.some(role => role.code === 'teacher')
-    ? import.meta.env.VITE_SERVER
-    : import.meta.env.VITE_SERVER
+  try {
+    const role = uni.getStorageSync('role')
+    return role === 'teacher'
+      ? import.meta.env.VITE_TEACH_SERVER
+      : import.meta.env.VITE_STUDY_SERVER
+  }
+  catch {
+    return import.meta.env.VITE_STUDY_SERVER
+  }
 }
 
 export const alovaInstance = createAlova({
@@ -123,5 +127,6 @@ async function handleError(message: string): Promise<void> {
 }
 
 export function switchServer(serverType: ServerType) {
+  uni.setStorageSync('role', serverType)
   alovaInstance.options.baseURL = getBaseURL(serverType)
 }
