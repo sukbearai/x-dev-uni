@@ -35,7 +35,6 @@ export const useAuthStore = defineStore('auth', () => {
         return true
       }
       catch {
-        logout()
         return false
       }
     }
@@ -105,9 +104,11 @@ export const useAuthStore = defineStore('auth', () => {
     const currentPage = pages[pages.length - 1] as any
     const currentPath = currentPage ? `/${currentPage.route}` : ''
 
-    uni.redirectTo({
-      url: `/pages/common/login/index${currentPath ? `?redirect=${encodeURIComponent(currentPath)}` : ''}`,
-    })
+    setTimeout(() => {
+      uni.redirectTo({
+        url: `/pages/common/login/index${currentPath ? `?redirect=${encodeURIComponent(currentPath)}` : ''}`,
+      })
+    }, 1000)
   }
 
   // async function refreshToken() {

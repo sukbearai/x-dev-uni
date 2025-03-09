@@ -1,6 +1,5 @@
 /* eslint-disable ts/no-use-before-define */
 import { useAuthStore } from '@/stores/useAuthStore'
-import { whiteList } from '@/utils/router-guard'
 import AdapterUniapp from '@alova/adapter-uniapp'
 import { createAlova } from 'alova'
 
@@ -68,18 +67,10 @@ export const alovaInstance = createAlova({
       switch (statusCode) {
         case 401:
           if (!isLogout) {
+            await handleError(msg || '登录失效', 1000)
             const authStore = useAuthStore()
-            const currentPage = getCurrentPages().pop()
-            const currentPath = currentPage ? `/${currentPage.route}` : ''
             authStore.logout()
             isLogout = true
-
-            // 记录当前页面路径
-            if (currentPath && !whiteList.some(path => currentPath.startsWith(path))) {
-              uni.redirectTo({
-                url: `/pages/common/login/index?redirect=${encodeURIComponent(currentPath)}`,
-              })
-            }
 
             // try {
             //   // 尝试刷新 token
@@ -116,13 +107,13 @@ export const alovaInstance = createAlova({
   },
 })
 
-async function handleError(message: string): Promise<void> {
+async function handleError(message: string, time: number = 3000): Promise<void> {
   uni.hideLoading()
   await new Promise(resolve => setTimeout(resolve, 300))
   uni.showToast({
     title: message,
     icon: 'none',
-    duration: 3000,
+    duration: time,
   })
 }
 
