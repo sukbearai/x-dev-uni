@@ -95,9 +95,7 @@ export const useAuthStore = defineStore('auth', () => {
     permissionStore.clearPermissions()
 
     // 清理本地存储
-    uni.removeStorageSync('auth-store')
-    uni.removeStorageSync('user-store')
-    uni.removeStorageSync('permission-store')
+    uni.clearStorageSync()
 
     // 获取当前页面路径用于重定向
     const pages = getCurrentPages()
