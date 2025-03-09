@@ -19,7 +19,7 @@
     "types": [
       "@dcloudio/types"
     ],
-    "allowJs": true,
+    "allowJs": false,
     "strict": true,
     "sourceMap": true,
     "esModuleInterop": true
