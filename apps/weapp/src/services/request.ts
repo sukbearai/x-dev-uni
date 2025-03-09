@@ -1,14 +1,23 @@
 /* eslint-disable ts/no-use-before-define */
 import { useAuthStore } from '@/stores/useAuthStore'
+import { useUserStore } from '@/stores/useUserStore'
 import { whiteList } from '@/utils/router-guard'
 import AdapterUniapp from '@alova/adapter-uniapp'
 import { createAlova } from 'alova'
 
 let isLogout = false
 
+// 根据用户角色获取不同的 baseURL
+function getBaseURL(): string {
+  const userStore = useUserStore()
+  return userStore.userInfo?.roleList?.some(role => role.code === 'teacher')
+    ? import.meta.env.VITE_SERVER
+    : import.meta.env.VITE_SERVER
+}
+
 export const alovaInstance = createAlova({
   cacheLogger: false,
-  baseURL: import.meta.env.VITE_SERVER,
+  baseURL: getBaseURL(),
 
   beforeRequest(method) {
     const authStore = useAuthStore()

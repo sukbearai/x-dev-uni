@@ -3,9 +3,11 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "uni --mode dev -p mp-weixin",
+    "test": "uni --mode test -p mp-weixin",
     "prod": "uni --mode prod -p mp-weixin",
     "build": "npm run build:mp-weixin",
     "build:dev": "uni --mode dev build -p mp-weixin && npm run upload:build",
+    "build:test": "uni --mode test build -p mp-weixin && npm run upload:build",
     "build:prod": "uni --mode prod build -p mp-weixin && npm run upload:build",
     "dev:app": "uni -p app",
     "dev:custom": "uni -p",
