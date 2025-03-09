@@ -1,8 +1,10 @@
 import type { UserInfoRes } from '@/services/login/type'
 import { useAuthService } from '@/services/login'
+import { switchServer } from '@/services/request'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { usePermissionStore } from './usePermissionStore'
+import { Role, useTabBarStore } from './useTabBarStore'
 
 export const useUserStore = defineStore('user', () => {
   // 状态定义
@@ -14,6 +16,12 @@ export const useUserStore = defineStore('user', () => {
   // 用户信息管理
   function setUserInfo(info: UserInfoRes) {
     userInfo.value = info
+  }
+
+  function getUserRole(): Role {
+    const roleCode = userInfo.value?.roleList?.[0]?.code
+    if (roleCode === 'teacher') { return Role.teacher }
+    return Role.student
   }
 
   function clearUserInfo() {
@@ -31,6 +39,14 @@ export const useUserStore = defineStore('user', () => {
     const permissionStore = usePermissionStore()
     permissionStore.setPermissions(info.menuList || [], info.roleList || [])
 
+    // 初始化 tabbar
+    const tabBarStore = useTabBarStore()
+    tabBarStore.initTabBar()
+
+    // 根据用户角色初始化服务器地址
+    const serverType = info.roleList?.some(role => role.code === 'teacher') ? 'teach' : 'study'
+    switchServer(serverType)
+
     return info
   }
 
@@ -38,5 +54,6 @@ export const useUserStore = defineStore('user', () => {
     userInfo,
     fetchUserInfo,
     clearUserInfo,
+    getUserRole,
   }
 })

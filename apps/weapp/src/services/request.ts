@@ -5,10 +5,18 @@ import { whiteList } from '@/utils/router-guard'
 import AdapterUniapp from '@alova/adapter-uniapp'
 import { createAlova } from 'alova'
 
+export type ServerType = 'teach' | 'study'
+
 let isLogout = false
 
 // 根据用户角色获取不同的 baseURL
-function getBaseURL(): string {
+function getBaseURL(forceServer?: ServerType): string {
+  if (forceServer) {
+    return forceServer === 'teach'
+      ? import.meta.env.VITE_SERVER
+      : import.meta.env.VITE_SERVER
+  }
+
   const userStore = useUserStore()
   return userStore.userInfo?.roleList?.some(role => role.code === 'teacher')
     ? import.meta.env.VITE_SERVER
@@ -112,4 +120,8 @@ async function handleError(message: string): Promise<void> {
     icon: 'none',
     duration: 3000,
   })
+}
+
+export function switchServer(serverType: ServerType) {
+  alovaInstance.options.baseURL = getBaseURL(serverType)
 }

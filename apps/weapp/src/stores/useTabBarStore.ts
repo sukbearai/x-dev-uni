@@ -1,7 +1,8 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import { useUserStore } from './useUserStore'
 
-enum Role {
+export enum Role {
   teacher = 'teacher',
   student = 'student',
 }
@@ -49,6 +50,7 @@ const learningMenus: MenuItem[] = [
 ]
 
 export const useTabBarStore = defineStore('tabBar', () => {
+  const userStore = useUserStore()
   const hideNativeTabbar = ref<boolean>(false)
   const isShowTabBar = ref<boolean>(false)
   const current = ref<number>(0)
@@ -79,6 +81,11 @@ export const useTabBarStore = defineStore('tabBar', () => {
     uni.setStorageSync('role', role)
   }
 
+  function initTabBar(): void {
+    const role = userStore.getUserRole()
+    setMenus(role)
+  }
+
   return {
     // state
     hideNativeTabbar,
@@ -92,5 +99,6 @@ export const useTabBarStore = defineStore('tabBar', () => {
     showTabBar,
     switchTab,
     setMenus,
+    initTabBar,
   }
 })
