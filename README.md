@@ -21,6 +21,7 @@
   - 📊 状态管理：[pinia](https://pinia.vuejs.org/) - Vue 官方状态管理方案
   - 🔄 请求库：[alova](https://alova.js.org/zh-CN/) - 下一代请求工具
   - 🔐 认证授权： [详情](./apps/weapp/README.md) - 基于 pinia store persist 的认证方案
+  - ⚡️ 分包优化： [@uni-ku/bundle-optimizer](https://github.com/uni-ku/bundle-optimizer) - Uniapp Vue3 版本的分包优化实现
 
 ## 📦 项目结构
 
